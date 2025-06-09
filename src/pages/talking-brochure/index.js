@@ -709,7 +709,7 @@ export default function VoiceInteraction() {
 
   // Access query params directly
   const language = router.query.language || "English";
-  const uniqueId = router.query.unique || "";
+  const uniqueId = router.query.unique || "hello";
 
   // Use the custom speech recognition hook
   const {
