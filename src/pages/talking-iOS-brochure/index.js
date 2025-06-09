@@ -1297,14 +1297,14 @@ export default function VoiceInteraction() {
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
       const response = await fetch(
-        "https://cruncha.querease.ai/api/interactivedemos/process",
+        "https://tata-sampann-hi.thefirstimpression.ai/api/chat",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            data: "who are you", // Send text instead of audio
+            user_text: "who are you", // Send text instead of audio
             language: "english",
             platform: "android", // Use android platform for initial call
             session_id: uniqueId,
@@ -1325,7 +1325,7 @@ export default function VoiceInteraction() {
       console.log("✅ Initial API response:", data);
 
       setResponseText(
-        data.answer ||
+        data.response ||
           "Hello! I'm your voice assistant. How can I help you today?"
       );
 
@@ -1394,14 +1394,14 @@ export default function VoiceInteraction() {
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 
       const response = await fetch(
-        "https://cruncha.querease.ai/api/interactivedemos/process",
+        "https://tata-sampann-hi.thefirstimpression.ai/api/chat",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            data: audioBase64, // Send audio instead of text
+            user_text: audioBase64, // Send audio instead of text
             language: "english",
             platform: "iOS",
             session_id: uniqueId,
@@ -1421,7 +1421,7 @@ export default function VoiceInteraction() {
       const data = await response.json();
       console.log("✅ API response:", data);
 
-      setResponseText(data.answer || "Audio processed successfully");
+      setResponseText(data.response || "Audio processed successfully");
 
       if (data.audio) {
         playAudio(data.audio);

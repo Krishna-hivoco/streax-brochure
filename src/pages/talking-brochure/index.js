@@ -79,14 +79,14 @@ export default function VoiceInteraction() {
       console.log("🌐 Making initial API call with text:", text);
 
       const response = await fetch(
-        "https://cruncha.querease.ai/api/interactivedemos/process",
+        "https://tata-sampann-hi.thefirstimpression.ai/api/chat",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            data: text,
+            user_text: text,
             language: "english",
             session_id: uniqueId,
           }),
@@ -102,7 +102,7 @@ export default function VoiceInteraction() {
       const data = await response.json();
       console.log("✅ Initial API response:", data);
 
-      setResponseText(data.answer || "Hello! I'm your voice assistant.");
+      setResponseText(data.response || "Hello! I'm your voice assistant.");
 
       if (data.audio) {
         playAudio(data.audio);
@@ -417,14 +417,14 @@ export default function VoiceInteraction() {
       console.log("🌐 Making API call with transcript:", transcript);
 
       const response = await fetch(
-        "https://cruncha.querease.ai/api/interactivedemos/process",
+        "https://tata-sampann-hi.thefirstimpression.ai/api/chat",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            data: transcript,
+            user_text: transcript,
             language: "english",
             session_id: uniqueId,
           }),
@@ -440,7 +440,7 @@ export default function VoiceInteraction() {
       const data = await response.json();
       console.log("✅ API response:", data);
 
-      setResponseText(data.answer || "I heard: " + transcript);
+      setResponseText(data.response || "I heard: " + transcript);
 
       if (data.audio) {
         playAudio(data.audio);

@@ -1,5 +1,6 @@
 import "@/styles/globals.css";
 import { Poppins } from "next/font/google";
+import Head from "next/head";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -8,8 +9,13 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }) {
   return (
-    <div className={poppins.className}>
-      <Component {...pageProps} />
-    </div>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      </Head>
+      <div className={poppins.className}>
+        <Component {...pageProps} />
+      </div>
+    </>
   );
 }
