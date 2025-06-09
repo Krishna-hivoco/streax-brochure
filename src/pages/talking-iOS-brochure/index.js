@@ -1304,7 +1304,7 @@ export default function VoiceInteraction() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            user_text: "who are you", // Send text instead of audio
+            user_text: "start", // Send text instead of audio
             language: "english",
             platform: "android", // Use android platform for initial call
             session_id: uniqueId,
@@ -1387,7 +1387,7 @@ export default function VoiceInteraction() {
       console.log("🎵 Converting audio to base64...");
       const audioBase64 = await blobToBase64(audioBlob);
 
-      console.log("🌐 Making API call with audio data");
+      console.log("🌐 Making API call with audio data",audioBase64);
 
       // Create AbortController for timeout handling
       const controller = new AbortController();
