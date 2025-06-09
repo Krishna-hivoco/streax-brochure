@@ -72,7 +72,7 @@
 
 // export default useSpeechRecognition;
 
-
+'use client'
 import { useEffect, useRef, useState } from "react";
 
 const useSpeechRecognition = (onSpeechEnd) => {

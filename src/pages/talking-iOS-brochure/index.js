@@ -1207,7 +1207,7 @@
 //   );
 // }
 
-
+"use client";
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Mic, MicOff, Volume2, AlertTriangle } from "lucide-react";
