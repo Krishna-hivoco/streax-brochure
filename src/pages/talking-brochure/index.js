@@ -148,10 +148,11 @@ export default function VoiceInteraction() {
       clearTimeout(debounceTimeoutRef.current);
     }
 
-    // Only process if we have valid conditions
+    // Only process if we have valid conditions AND non-empty speech text
     if (
       speechText &&
       speechText.trim() &&
+      speechText.trim().length > 0 && // Additional check for meaningful content
       !isListening &&
       !isApiPending &&
       !processingRef.current &&
@@ -163,6 +164,8 @@ export default function VoiceInteraction() {
         if (
           !processingRef.current &&
           !isApiPending &&
+          speechText &&
+          speechText.trim().length > 0 &&
           speechText !== lastProcessedRef.current
         ) {
           console.log("🚀 Processing new speech (debounced):", speechText);
@@ -327,6 +330,13 @@ export default function VoiceInteraction() {
       console.log(
         "⚠️ API call prevented - already in progress or processing flag cleared"
       );
+      return;
+    }
+
+    // Check if transcript is meaningful
+    if (!transcript || !transcript.trim() || transcript.trim().length < 2) {
+      console.log("⚠️ API call prevented - no meaningful speech detected");
+      processingRef.current = false; // Reset processing flag
       return;
     }
 
