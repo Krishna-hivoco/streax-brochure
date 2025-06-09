@@ -1,5 +1,3 @@
-
-
 // "use client";
 // import Image from "next/image";
 // import { useState, useRef, useEffect } from "react";
@@ -118,84 +116,84 @@
 //   };
 
 //   // Client-side check and speech recognition initialization
-//   // useEffect(() => {
-//   //   // Ensure we're on the client side
-//   //   setIsClient(true);
+//   useEffect(() => {
+//     // Ensure we're on the client side
+//     setIsClient(true);
 
-//   //   const initializeSpeechRecognition = () => {
-//   //     try {
-//   //       // Check if we're in a secure context (required for speech recognition)
-//   //       if (!window.isSecureContext) {
-//   //         return;
-//   //       }
+//     const initializeSpeechRecognition = () => {
+//       try {
+//         // Check if we're in a secure context (required for speech recognition)
+//         if (!window.isSecureContext) {
+//           return;
+//         }
 
-//   //       const SpeechRecognition =
-//   //         window.SpeechRecognition || window.webkitSpeechRecognition;
+//         const SpeechRecognition =
+//           window.SpeechRecognition || window.webkitSpeechRecognition;
 
-//   //       if (!SpeechRecognition) {
-//   //         setSpeechSupported(false);
-//   //         return;
-//   //       }
+//         if (!SpeechRecognition) {
+//           setSpeechSupported(false);
+//           return;
+//         }
 
-//   //       console.log("✅ Initializing Speech Recognition...");
-//   //       const recognition = new SpeechRecognition();
+//         console.log("✅ Initializing Speech Recognition...");
+//         const recognition = new SpeechRecognition();
 
-//   //       recognition.continuous = false;
-//   //       recognition.interimResults = false;
-//   //       recognition.lang = "en-US";
+//         recognition.continuous = false;
+//         recognition.interimResults = false;
+//         recognition.lang = "en-US";
 
-//   //       recognition.onstart = () => {
-//   //         console.log("🎤 Speech recognition started");
-//   //         setIsListening(true);
-//   //       };
+//         recognition.onstart = () => {
+//           console.log("🎤 Speech recognition started");
+//           setIsListening(true);
+//         };
 
-//   //       recognition.onresult = (event) => {
-//   //         console.log("📝 Speech recognition result:", event);
+//         recognition.onresult = (event) => {
+//           console.log("📝 Speech recognition result:", event);
 
-//   //         // Get the final transcript
-//   //         const transcript = Array.from(event.results)
-//   //           .map((result) => result[0].transcript)
-//   //           .join("");
+//           // Get the final transcript
+//           const transcript = Array.from(event.results)
+//             .map((result) => result[0].transcript)
+//             .join("");
 
-//   //         console.log("📝 Final transcript:", transcript);
+//           console.log("📝 Final transcript:", transcript);
 
-//   //         // Only update if we have a non-empty transcript and it's different
-//   //         if (
-//   //           transcript &&
-//   //           transcript.trim() &&
-//   //           transcript !== lastProcessedRef.current
-//   //         ) {
-//   //           setSpeechText(transcript);
-//   //         }
-//   //       };
+//           // Only update if we have a non-empty transcript and it's different
+//           if (
+//             transcript &&
+//             transcript.trim() &&
+//             transcript !== lastProcessedRef.current
+//           ) {
+//             setSpeechText(transcript);
+//           }
+//         };
 
-//   //       recognition.onend = () => {
-//   //         console.log("🔇 Speech recognition ended");
-//   //         setIsListening(false);
-//   //       };
+//         recognition.onend = () => {
+//           console.log("🔇 Speech recognition ended");
+//           setIsListening(false);
+//         };
 
-//   //       recognition.onerror = (event) => {
-//   //         console.error("❌ Speech recognition error:", event.error);
-//   //         setIsListening(false);
+//         recognition.onerror = (event) => {
+//           console.error("❌ Speech recognition error:", event.error);
+//           setIsListening(false);
 
-//   //         // Handle specific errors
-//   //         if (event.error === "not-allowed") {
-//   //           setDebugInfo("❌ Microphone permission denied");
-//   //         }
-//   //       };
+//           // Handle specific errors
+//           if (event.error === "not-allowed") {
+//             setDebugInfo("❌ Microphone permission denied");
+//           }
+//         };
 
-//   //       recognitionRef.current = recognition;
-//   //       setSpeechSupported(true);
-//   //     } catch (error) {
-//   //       console.error("❌ Failed to initialize speech recognition:", error);
-//   //       setSpeechSupported(false);
-//   //     }
-//   //   };
+//         recognitionRef.current = recognition;
+//         setSpeechSupported(true);
+//       } catch (error) {
+//         console.error("❌ Failed to initialize speech recognition:", error);
+//         setSpeechSupported(false);
+//       }
+//     };
 
-//   //   // Small delay to ensure DOM is ready
-//   //   const timer = setTimeout(initializeSpeechRecognition, 100);
-//   //   return () => clearTimeout(timer);
-//   // }, []);
+//     // Small delay to ensure DOM is ready
+//     const timer = setTimeout(initializeSpeechRecognition, 100);
+//     return () => clearTimeout(timer);
+//   }, []);
 
 //   // Handle speech text processing with debounce and session tracking
 //   useEffect(() => {
@@ -750,7 +748,7 @@
 //       </div>
 //     </div>
 //   );
-//
+// }
 
 "use client";
 import Image from "next/image";
@@ -794,34 +792,22 @@ export default function VoiceInteraction() {
   const language = router.query.language || "English";
   const uniqueId = router.query.unique || "";
 
-  // Initialize speech recognition hook
+  // Use the custom speech recognition hook
   const {
     recording: isListening,
     speechText,
     startSpeechRecognition,
     stopSpeechRecognition,
     imageRef,
-  } = useSpeechRecognition(() => {
-    // This callback is triggered when speech ends
-    console.log("Speech ended callback triggered");
-  });
+  } = useSpeechRecognition();
 
-  // Check if speech recognition is supported
+  // Set speech support based on hook initialization
   useEffect(() => {
     setIsClient(true);
-
+    // Check if speech recognition is available
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (SpeechRecognition && window.isSecureContext) {
-      setSpeechSupported(true);
-      setDebugInfo("✅ Speech recognition ready");
-    } else if (!window.isSecureContext) {
-      setSpeechSupported(false);
-      setDebugInfo("❌ HTTPS required for speech recognition");
-    } else {
-      setSpeechSupported(false);
-      setDebugInfo("❌ Speech recognition not supported in this browser");
-    }
+    setSpeechSupported(!!SpeechRecognition && window.isSecureContext);
   }, []);
 
   // Animation sequence on component mount
@@ -849,56 +835,6 @@ export default function VoiceInteraction() {
       }, 1800);
     }
   }, [isClient, hasInitialApiCalled]);
-
-  // Handle speech text processing with debounce
-  useEffect(() => {
-    console.log("Speech text effect:", {
-      speechText,
-      lastProcessed: lastProcessedRef.current,
-      isListening,
-      isApiPending,
-      processingRef: processingRef.current,
-      isDifferent: speechText !== lastProcessedRef.current,
-    });
-
-    // Clear any existing debounce
-    if (debounceTimeoutRef.current) {
-      clearTimeout(debounceTimeoutRef.current);
-    }
-
-    // Only process if we have valid conditions
-    if (
-      speechText &&
-      speechText.trim() &&
-      !isListening &&
-      !isApiPending &&
-      !processingRef.current &&
-      speechText !== lastProcessedRef.current
-    ) {
-      // Debounce the API call to prevent rapid firing
-      debounceTimeoutRef.current = setTimeout(() => {
-        if (
-          !processingRef.current &&
-          !isApiPending &&
-          speechText !== lastProcessedRef.current
-        ) {
-          console.log("🚀 Processing new speech (debounced):", speechText);
-
-          // Mark as processing and update last processed immediately
-          processingRef.current = true;
-          lastProcessedRef.current = speechText;
-
-          handleSpeechEnd(speechText);
-        }
-      }, 300);
-    }
-
-    return () => {
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }
-    };
-  }, [speechText, isListening, isApiPending]);
 
   // Initial API call function
   const handleInitialApiCall = async (text) => {
@@ -946,167 +882,57 @@ export default function VoiceInteraction() {
     }
   };
 
-  const handleSpeechEnd = async (transcript) => {
-    // Additional safety check - prevent duplicate API calls
-    if (isApiPending || processingRef.current === false) {
-      console.log(
-        "⚠️ API call prevented - already in progress or processing flag cleared"
-      );
-      return;
+  // Handle speech text processing with debounce and session tracking
+  useEffect(() => {
+    console.log("Speech text effect:", {
+      speechText,
+      lastProcessed: lastProcessedRef.current,
+      isListening,
+      isApiPending,
+      processingRef: processingRef.current,
+      sessionId: speechSessionRef.current,
+      isDifferent: speechText !== lastProcessedRef.current,
+    });
+
+    // Clear any existing debounce
+    if (debounceTimeoutRef.current) {
+      clearTimeout(debounceTimeoutRef.current);
     }
 
-    setIsApiPending(true);
+    // Only process if we have valid conditions
+    if (
+      speechText &&
+      speechText.trim() &&
+      !isListening &&
+      !isApiPending &&
+      !processingRef.current &&
+      speechText !== lastProcessedRef.current
+    ) {
+      // Debounce the API call to prevent rapid firing
+      debounceTimeoutRef.current = setTimeout(() => {
+        // Double-check conditions haven't changed during debounce
+        if (
+          !processingRef.current &&
+          !isApiPending &&
+          speechText !== lastProcessedRef.current
+        ) {
+          console.log("🚀 Processing new speech (debounced):", speechText);
 
-    try {
-      console.log("🌐 Making API call with transcript:", transcript);
+          // Mark as processing and update last processed immediately
+          processingRef.current = true;
+          lastProcessedRef.current = speechText;
 
-      const response = await fetch(
-        "https://tata-sampann-hi.thefirstimpression.ai/api/chat",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            user_text: transcript,
-            language: "english",
-            session_id: uniqueId,
-          }),
+          handleSpeechEnd(speechText);
         }
-      );
-
-      if (!response.ok) {
-        throw new Error(
-          `API request failed: ${response.status} ${response.statusText}`
-        );
-      }
-
-      const data = await response.json();
-      console.log("✅ API response:", data);
-
-      setResponseText(data.response || "I heard: " + transcript);
-
-      if (data.audio) {
-        playAudio(data.audio);
-      }
-    } catch (error) {
-      console.error("❌ API Error:", error);
-      setResponseText("Sorry, I couldn't process your request.");
-    } finally {
-      setIsApiPending(false);
-      processingRef.current = false;
-    }
-  };
-
-  const startListening = async () => {
-    if (!speechSupported) {
-      setDebugInfo("❌ Speech recognition not available");
-      return;
+      }, 300); // 300ms debounce
     }
 
-    if (isListening || isApiPending) {
-      console.log("Cannot start listening:", { isListening, isApiPending });
-      return;
-    }
-
-    try {
-      // Request microphone permission
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-
-      setResponseText("");
-      setDisplayedText("");
-
-      // Reset processing tracking
-      processingRef.current = false;
-      lastProcessedRef.current = "";
-      speechSessionRef.current += 1;
-
-      // Clear any pending debounced calls
+    return () => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
       }
-
-      setIsStreaming(false);
-      setShowMicPromptPopup(false);
-
-      if (streamingTimeoutRef.current) {
-        clearTimeout(streamingTimeoutRef.current);
-      }
-
-      console.log("🚀 Starting speech recognition...");
-      startSpeechRecognition();
-    } catch (error) {
-      console.error("❌ Failed to start listening:", error);
-      setDebugInfo(`❌ Microphone access denied: ${error.message}`);
-    }
-  };
-
-  const stopListening = () => {
-    console.log("🛑 Stopping speech recognition...");
-    stopSpeechRecognition();
-  };
-
-  const playAudio = (audioBase64) => {
-    setIsPlaying(true);
-    const audioSrc = `data:audio/mp3;base64,${audioBase64}`;
-    if (audioRef.current) {
-      audioRef.current.src = audioSrc;
-      audioRef.current.play();
-    }
-  };
-
-  const handleAudioEnd = () => {
-    setIsPlaying(false);
-    setShowInterruptPopup(false);
-
-    // Check if it's mobile device
-    const isMobile =
-      /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-        navigator.userAgent
-      );
-
-    if (!isMobile) {
-      setTimeout(() => {
-        startListening();
-      }, 500);
-    } else {
-      setDebugInfo("✅ Tap the microphone to continue");
-    }
-  };
-
-  const handleMicClick = () => {
-    if (isApiPending) {
-      return;
-    }
-
-    if (isListening) {
-      stopListening();
-    } else if (isPlaying) {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-      setIsPlaying(false);
-      setShowInterruptPopup(false);
-      setResponseText("");
-      setDisplayedText("");
-
-      // Reset processing tracking
-      processingRef.current = false;
-      lastProcessedRef.current = "";
-      speechSessionRef.current += 1;
-
-      if (debounceTimeoutRef.current) {
-        clearTimeout(debounceTimeoutRef.current);
-      }
-
-      setTimeout(() => {
-        startListening();
-      }, 100);
-    } else {
-      startListening();
-    }
-  };
+    };
+  }, [speechText, isListening, isApiPending]);
 
   // Interrupt popup effect for audio playing
   useEffect(() => {
@@ -1201,6 +1027,166 @@ export default function VoiceInteraction() {
       }
     };
   }, [responseText]);
+
+  const startListening = async () => {
+    if (!speechSupported) {
+      setDebugInfo("❌ Speech recognition not available");
+      return;
+    }
+
+    if (isListening || isApiPending) {
+      console.log("Cannot start listening:", {
+        isListening,
+        isApiPending,
+      });
+      return;
+    }
+
+    try {
+      // Request microphone permission explicitly
+      await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      setResponseText("");
+      setDisplayedText("");
+
+      // Reset processing tracking and increment session
+      processingRef.current = false;
+      lastProcessedRef.current = "";
+      speechSessionRef.current += 1;
+
+      // Clear any pending debounced calls
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+
+      setIsStreaming(false);
+      setShowMicPromptPopup(false);
+
+      if (streamingTimeoutRef.current) {
+        clearTimeout(streamingTimeoutRef.current);
+      }
+
+      console.log(
+        "🚀 Starting speech recognition... Session:",
+        speechSessionRef.current
+      );
+
+      startSpeechRecognition();
+    } catch (error) {
+      console.error("❌ Failed to start listening:", error);
+      setDebugInfo(`❌ Microphone access denied: ${error.message}`);
+    }
+  };
+
+  const stopListening = () => {
+    if (isListening) {
+      console.log("🛑 Stopping speech recognition...");
+      stopSpeechRecognition();
+    }
+  };
+
+  const handleSpeechEnd = async (transcript) => {
+    // Additional safety check - prevent duplicate API calls
+    if (isApiPending || processingRef.current === false) {
+      console.log(
+        "⚠️ API call prevented - already in progress or processing flag cleared"
+      );
+      return;
+    }
+
+    setIsApiPending(true);
+
+    try {
+      console.log("🌐 Making API call with transcript:", transcript);
+
+      const response = await fetch(
+        "https://tata-sampann-hi.thefirstimpression.ai/api/chat",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_text: transcript,
+            language: "english",
+            session_id: uniqueId,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          `API request failed: ${response.status} ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      console.log("✅ API response:", data);
+
+      setResponseText(data.response || "I heard: " + transcript);
+
+      if (data.audio) {
+        playAudio(data.audio);
+      }
+    } catch (error) {
+      console.error("❌ API Error:", error);
+      setResponseText("Sorry, I couldn't process your request.");
+    } finally {
+      setIsApiPending(false);
+      processingRef.current = false; // Reset processing flag
+    }
+  };
+
+  const playAudio = (audioBase64) => {
+    setIsPlaying(true);
+    const audioSrc = `data:audio/mp3;base64,${audioBase64}`;
+    if (audioRef.current) {
+      audioRef.current.src = audioSrc;
+      audioRef.current.play();
+    }
+  };
+
+  const handleAudioEnd = () => {
+    setIsPlaying(false);
+    setShowInterruptPopup(false);
+    setTimeout(() => {
+      startListening();
+    }, 500);
+  };
+
+  const handleMicClick = () => {
+    if (isApiPending) {
+      return;
+    }
+
+    if (isListening) {
+      stopListening();
+    } else if (isPlaying) {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+      }
+      setIsPlaying(false);
+      setShowInterruptPopup(false);
+      setResponseText("");
+      setDisplayedText("");
+
+      // Reset processing tracking and clear any pending calls
+      processingRef.current = false;
+      lastProcessedRef.current = "";
+      speechSessionRef.current += 1;
+
+      if (debounceTimeoutRef.current) {
+        clearTimeout(debounceTimeoutRef.current);
+      }
+
+      setTimeout(() => {
+        startListening();
+      }, 100);
+    } else {
+      startListening();
+    }
+  };
 
   // Don't render until client-side
   if (!isClient) {
@@ -1299,13 +1285,6 @@ export default function VoiceInteraction() {
                   micButtonVisible ? "opacity-100" : "opacity-0"
                 }`}
               >
-                {/* Hidden button referenced by the hook */}
-                <button
-                  ref={imageRef}
-                  style={{ display: "none" }}
-                  onClick={() => console.log("Hidden button clicked")}
-                />
-
                 {/* Mic Prompt Popup */}
                 {showMicPromptPopup && speechSupported && (
                   <div className="absolute -right-8 top-1/2 transform translate-x-full -translate-y-1/2 z-50 animate-bounce ml-4">
@@ -1330,6 +1309,7 @@ export default function VoiceInteraction() {
                 )}
 
                 <button
+                  ref={imageRef}
                   onClick={handleMicClick}
                   disabled={isApiPending || !speechSupported}
                   className={`relative w-32 h-32 rounded-full border-4 overflow-hidden transition-all duration-300 transform ${
