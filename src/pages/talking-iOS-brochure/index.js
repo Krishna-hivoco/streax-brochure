@@ -561,7 +561,12 @@ export default function VoiceInteraction() {
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="relative w-full max-w-md h-svh rounded-lg overflow-hidden shadow-lg bg-cover bg-center bg-[#C04A6D]">
+      <div
+        style={{
+          backgroundImage: "url('/images/light-bg.png')",
+        }}
+        className="relative w-full max-w-md h-svh rounded-lg overflow-hidden shadow-lg bg-cover bg-center bg-[#C04A6D]"
+      >
         <div className="relative z-10 h-full flex flex-col p-6">
           {/* Debug Info Panel */}
           {debugInfo && (
