@@ -274,7 +274,7 @@ export default function OrderPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col relative bg-black">
+    <div className="h-svh flex flex-col relative bg-black">
       <Head>
         <title>Streax</title>
         <meta name="description" content="Streax Beauty Product" />
