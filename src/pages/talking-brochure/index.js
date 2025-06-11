@@ -522,8 +522,8 @@ export default function VoiceInteraction() {
           )}
 
           {/* Top - Logo with scale animation */}
-          <div className="text-center py-4">
-            <ArrowLeft onClick={()=> handleGoBack()} />
+          <div className="text-center py-4 ">
+            <ArrowLeft className="absolute top-11" onClick={()=> handleGoBack()} />
             <div
               className={`transition-all duration-800 ease-out ${
                 topContentAnimated
