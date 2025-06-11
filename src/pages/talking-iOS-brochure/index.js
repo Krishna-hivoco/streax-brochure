@@ -584,7 +584,7 @@ export default function VoiceInteraction() {
           {/* Top - Logo with scale animation */}
           <div className="text-center py-4">
             <ArrowLeft
-              className="absolute top-11"
+              className="absolute z-20 top-11"
               onClick={() => handleGoBack()}
             />
             <div
