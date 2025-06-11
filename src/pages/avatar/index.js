@@ -275,10 +275,7 @@ export default function OrderPage() {
 
   return (
     <div className="h-svh flex flex-col relative bg-black">
-      <Head>
-        <title>Streax</title>
-        <meta name="description" content="Streax Beauty Product" />
-      </Head>
+     
 
       {/* Header with logo */}
       <header className="absolute top-0 left-0 right-0 z-10 py-4 px-4 md:px-10 flex justify-center items-center">

@@ -24,6 +24,7 @@ export default function App({ Component, pageProps }) {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://legendsfaceoff.com" />
         <meta
           property="og:title"
           content="Streax Professional Skin – Salon-Grade Brightening & Anti-Aging Skincare Kits"
@@ -32,29 +33,56 @@ export default function App({ Component, pageProps }) {
           property="og:description"
           content="Discover Streax Professional Skin – a dermatologist-tested skincare range with salon-grade brightening and anti-aging facial kits. Free from harmful chemicals, enriched with Glutathione, Niacinamide, and Collagen Peptides for visibly smoother, brighter, youthful skin. Safe for all skin types."
         />
-        <meta property="og:image" content="/images/name.png" />
+        <meta
+          property="og:image"
+          content="https://legendsfaceoff.com/images/name.png"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta
+          property="og:image:alt"
+          content="Streax Professional Skin - Salon-Grade Skincare Products"
+        />
 
         {/* Twitter */}
-        <meta property="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@yourtwitterhandle" />
         <meta
-          property="twitter:title"
+          name="twitter:title"
           content="Streax Professional Skin – Salon-Grade Brightening & Anti-Aging Skincare Kits"
         />
         <meta
-          property="twitter:description"
+          name="twitter:description"
           content="Discover Streax Professional Skin – a dermatologist-tested skincare range with salon-grade brightening and anti-aging facial kits. Free from harmful chemicals, enriched with Glutathione, Niacinamide, and Collagen Peptides for visibly smoother, brighter, youthful skin. Safe for all skin types."
         />
-        <meta property="twitter:image" content="/images/name.png" />
+        <meta
+          name="twitter:image"
+          content="https://legendsfaceoff.com/images/name.png"
+        />
+        <meta
+          name="twitter:image:alt"
+          content="Streax Professional Skin - Salon-Grade Skincare Products"
+        />
+
+        {/* Additional Open Graph tags */}
+        <meta property="og:site_name" content="Streax Professional Skin" />
+        <meta property="og:locale" content="en_US" />
 
         {/* Favicon */}
-        <link rel="icon" href="/images/name.png" />
+        <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="/favicon-32x32.png"
+        />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
           href="/favicon-16x16.png"
         />
-        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </Head>
       <div className={poppins.className}>
         <Component {...pageProps} />
