@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Mic, MicOff, Volume2, AlertTriangle } from "lucide-react";
+import { Mic, MicOff, Volume2, AlertTriangle, ArrowLeft } from "lucide-react";
 
 import { useRouter } from "next/router";
 import useVoiceRecorder from "@/hooks/useVoiceRecorder";
@@ -149,6 +149,7 @@ export default function VoiceInteraction() {
             language: "english",
             platform: "android", // Use android platform for initial call
             session_id: uniqueId,
+            is_avatar: false,
           }),
           signal: controller.signal,
         }
@@ -307,6 +308,7 @@ export default function VoiceInteraction() {
               language: "english",
               platform: "iOS",
               session_id: uniqueId,
+              is_avatar: false,
             }),
             signal: controller.signal,
           }
@@ -555,6 +557,10 @@ export default function VoiceInteraction() {
   const microphoneSupported = permissionState !== "denied";
   const microphoneAllowed = permissionState === "granted";
 
+  const handleGoBack = () => {
+    router.push("/explore");
+  };
+
   return (
     <div
       className={`flex justify-center items-center h-svh transition-opacity duration-1000 ${
@@ -577,6 +583,7 @@ export default function VoiceInteraction() {
 
           {/* Top - Logo with scale animation */}
           <div className="text-center py-4">
+            <ArrowLeft onClick={() => handleGoBack()} />
             <div
               className={`transition-all duration-800 ease-out ${
                 topContentAnimated

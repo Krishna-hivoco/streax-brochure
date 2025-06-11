@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
-import { Mic, MicOff, Volume2, AlertTriangle } from "lucide-react";
+import { Mic, MicOff, Volume2, AlertTriangle, ArrowLeft } from "lucide-react";
 import { useRouter } from "next/router";
 import useSpeechRecognition from "@/hooks/useSpeechRecognition";
 
@@ -139,6 +139,7 @@ export default function VoiceInteraction() {
             user_text: text,
             language: "english",
             session_id: uniqueId,
+            is_avatar: false,
           }),
         }
       );
@@ -397,6 +398,7 @@ export default function VoiceInteraction() {
             user_text: transcript,
             language: "english",
             session_id: uniqueId,
+            is_avatar: false,
           }),
         }
       );
@@ -494,6 +496,11 @@ export default function VoiceInteraction() {
     );
   }
 
+  const handleGoBack = () => {
+    router.push("/explore");
+  };
+
+
   return (
     <div
       className={`flex justify-center items-center h-svh transition-opacity duration-1000 ${
@@ -516,6 +523,7 @@ export default function VoiceInteraction() {
 
           {/* Top - Logo with scale animation */}
           <div className="text-center py-4">
+            <ArrowLeft onClick={()=> handleGoBack()} />
             <div
               className={`transition-all duration-800 ease-out ${
                 topContentAnimated

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import Loading from "@/components/Loading";
 import Image from "next/image";
+import { ArrowLeft } from "lucide-react";
 // import { useOrder } from "@/context/OrderContext";
 
 export default function OrderPage() {
@@ -236,6 +237,7 @@ export default function OrderPage() {
           body: JSON.stringify({
             session_id: uid ? uid : uuid,
             user_text: question ? question : speechText,
+            is_avatar:true
             // open_model: false,
             // user_text: text,
             // language: "english",
@@ -273,12 +275,16 @@ export default function OrderPage() {
     handleStartRecording();
   };
 
+  const handleGoBack = () => {
+    router.push("/explore");
+  };
+
+
   return (
     <div className="h-svh flex flex-col relative bg-black">
-     
-
       {/* Header with logo */}
       <header className="absolute top-0 left-0 right-0 z-10 py-4 px-4 md:px-10 flex justify-center items-center">
+        <ArrowLeft className="absolute  left-4" onClick={() => handleGoBack()} />
         <Link href="/">
           <div className="w-32 md:w-40 cursor-pointer">
             <Image

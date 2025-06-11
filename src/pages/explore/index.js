@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 export default function ExplorePage() {
   const router = useRouter();
@@ -72,6 +73,9 @@ export default function ExplorePage() {
     };
   }, []);
 
+
+ 
+ 
   return (
     <div
       className={`flex justify-center items-center h-svh transition-opacity duration-1000 ${
@@ -85,6 +89,7 @@ export default function ExplorePage() {
         }}
       >
         <div className="relative z-10 h-full flex flex-col p-6">
+         
           {/* Top - Logo with slide animation from center */}
           <div className="text-center py-4">
             <div
