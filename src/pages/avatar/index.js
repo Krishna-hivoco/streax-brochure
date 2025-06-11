@@ -296,7 +296,7 @@ export default function OrderPage() {
       </header>
 
       {/* Full-height video container */}
-      <div className="flex-grow flex flex-col items-center justify-center overflow-hidden bg-[#C04A6D]">
+      <div className="flex-grow flex flex-col items-center justify-center overflow-hidden bg-black">
         {/* Speaking video */}
         <video
           ref={speakingVideoRef}
