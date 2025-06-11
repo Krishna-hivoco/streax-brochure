@@ -60,6 +60,41 @@ export default function VoiceInteraction() {
     setSpeechSupported(!!SpeechRecognition && window.isSecureContext);
   }, []);
 
+  useEffect(() => {
+    // This function handles the beforeunload event (page refresh)
+    const handleBeforeUnload = (event) => {
+      // Store a flag in sessionStorage to indicate a page refresh is happening
+      sessionStorage.setItem("isRefreshing", "true");
+    };
+
+    // This function runs when the page loads
+    const handlePageLoad = () => {
+      // Check if the page is being loaded after a refresh
+      const isRefreshing = sessionStorage.getItem("isRefreshing");
+
+      if (isRefreshing === "true") {
+        // Clear the flag
+        sessionStorage.removeItem("isRefreshing");
+
+        // Redirect to the home page
+        router.push("/explore");
+      }
+    };
+
+    // Add event listeners
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    // Check on page load
+    if (typeof window !== "undefined") {
+      handlePageLoad();
+    }
+
+    // Clean up event listeners when component unmounts
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [router]);
+
   // Animation sequence on component mount
   useEffect(() => {
     const timer1 = setTimeout(() => setIsVisible(true), 100);

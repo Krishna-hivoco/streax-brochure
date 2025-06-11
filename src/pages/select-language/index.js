@@ -63,7 +63,7 @@ export default function SelectLanguage() {
           router.push(
             `/talking-iOS-brochure?language=${language}&unique=${unique}`
           ),
-        500
+        300
       );
     } else {
       setTimeout(
@@ -71,7 +71,7 @@ export default function SelectLanguage() {
           router.push(
             `/talking-brochure?language=${language}&unique=${unique}`
           ),
-        500
+        300
       );
     }
   };

@@ -11,7 +11,50 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+          Streax Professional Skin – Salon-Grade Brightening & Anti-Aging
+          Skincare Kits
+        </title>
+        <meta
+          name="description"
+          content="Discover Streax Professional Skin – a dermatologist-tested skincare range with salon-grade brightening and anti-aging facial kits. Free from harmful chemicals, enriched with Glutathione, Niacinamide, and Collagen Peptides for visibly smoother, brighter, youthful skin. Safe for all skin types."
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charSet="utf-8" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Streax Professional Skin – Salon-Grade Brightening & Anti-Aging Skincare Kits"
+        />
+        <meta
+          property="og:description"
+          content="Discover Streax Professional Skin – a dermatologist-tested skincare range with salon-grade brightening and anti-aging facial kits. Free from harmful chemicals, enriched with Glutathione, Niacinamide, and Collagen Peptides for visibly smoother, brighter, youthful skin. Safe for all skin types."
+        />
+        <meta property="og:image" content="/images/name.png" />
+
+        {/* Twitter */}
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta
+          property="twitter:title"
+          content="Streax Professional Skin – Salon-Grade Brightening & Anti-Aging Skincare Kits"
+        />
+        <meta
+          property="twitter:description"
+          content="Discover Streax Professional Skin – a dermatologist-tested skincare range with salon-grade brightening and anti-aging facial kits. Free from harmful chemicals, enriched with Glutathione, Niacinamide, and Collagen Peptides for visibly smoother, brighter, youthful skin. Safe for all skin types."
+        />
+        <meta property="twitter:image" content="/images/name.png" />
+
+        {/* Favicon */}
+        <link rel="icon" href="/images/name.png" />
+        <link
+          rel="icon"
+          type="image/png"
+          sizes="16x16"
+          href="/favicon-16x16.png"
+        />
+        <link rel="apple-touch-icon" href="apple-touch-icon.png" />
       </Head>
       <div className={poppins.className}>
         <Component {...pageProps} />
