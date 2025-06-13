@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }) {
 
         {/* Open Graph / Facebook */}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://legendsfaceoff.com" />
+        <meta property="og:url" content="https://streax.talkingbrochure.hivoco.com" />
         <meta
           property="og:title"
           content="Streax Professional Skin – Salon-Grade Brightening & Anti-Aging Skincare Kits"
@@ -35,7 +35,7 @@ export default function App({ Component, pageProps }) {
         />
         <meta
           property="og:image"
-          content="https://legendsfaceoff.com/images/name.png"
+          content="https://streax.talkingbrochure.hivoco.com/images/name.png"
         />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -57,7 +57,7 @@ export default function App({ Component, pageProps }) {
         />
         <meta
           name="twitter:image"
-          content="https://legendsfaceoff.com/images/name.png"
+          content="https://streax.talkingbrochure.hivoco.com/images/name.png"
         />
         <meta
           name="twitter:image:alt"
