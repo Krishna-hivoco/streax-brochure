@@ -422,20 +422,6 @@ export default function OrderPage() {
   const [currentVideo, setCurrentVideo] = useState(""); // State for current video
   const router = useRouter();
 
-  const speakingVideos = ["speaking1.mp4", "speaking2.mp4", "speaking3.mp4"];
-
-  function getRandomSpeakingVideo(videos) {
-    const randomIndex = Math.floor(Math.random() * videos.length);
-    return videos[randomIndex];
-  }
-
-  // Set random speaking video only once when component mounts
-  useEffect(() => {
-    const randomSpeakingVideo = getRandomSpeakingVideo(speakingVideos);
-    setCurrentVideo(randomSpeakingVideo);
-    console.log("Random speaking video selected:", randomSpeakingVideo);
-  }, []); // Empty dependency array means this runs only once
-
   // Handle speech recognition end
   const handleSpeechEnd = () => {
     console.log("Speech recognition completed");
@@ -457,6 +443,20 @@ export default function OrderPage() {
       );
     }
   }, [speechText, recording]);
+
+  const speakingVideos = ["speaking1.mp4", "speaking2.mp4", "speaking3.mp4"];
+
+  function getRandomSpeakingVideo(videos) {
+    const randomIndex = Math.floor(Math.random() * videos.length);
+    return videos[randomIndex];
+  }
+
+  // Set random speaking video only once when component mounts
+  useEffect(() => {
+    const randomSpeakingVideo = getRandomSpeakingVideo(speakingVideos);
+    setCurrentVideo(randomSpeakingVideo);
+    console.log("Random speaking video selected:", randomSpeakingVideo);
+  }, [recording]); // Empty dependency array means this runs only once
 
   useEffect(() => {
     // This function handles the beforeunload event (page refresh)
